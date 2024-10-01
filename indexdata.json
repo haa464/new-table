@@ -1,0 +1,168 @@
+[
+    {
+      "id": 1,
+      "chemical_name": "Acetone",
+      "vender": "ChemLab Supplies",
+      "density": "0.79 g/cm³",
+      "viscosity": "0.32 mPa·s",
+      "packaging": "Plastic barrel",
+      "pack_size": 50,
+      "unit": "L",
+      "quantity": 100
+    },
+    {
+      "id": 2,
+      "chemical_name": "Ethanol",
+      "vender": "BioChem Industries",
+      "density": "0.789 g/cm³",
+      "viscosity": "1.2 mPa·s",
+      "packaging": "Glass bottles",
+      "pack_size": 25,
+      "unit": "L",
+      "quantity": 200
+    },
+    {
+      "id": 3,
+      "chemical_name": "Sulfuric Acid",
+      "vender": "AcidCorp",
+      "density": "1.84 g/cm³",
+      "viscosity": "26.7 mPa·s",
+      "packaging": "Steel drums",
+      "pack_size": 100,
+      "unit": "L",
+      "quantity": 50
+    },
+    {
+      "id": 4,
+      "chemical_name": "Methanol",
+      "vender": "GreenChem Solutions",
+      "density": "0.79 g/cm³",
+      "viscosity": "0.59 mPa·s",
+      "packaging": "Plastic containers",
+      "pack_size": 30,
+      "unit": "L",
+      "quantity": 120
+    },
+    {
+      "id": 5,
+      "chemical_name": "Sodium Hydroxide",
+      "vender": "PureChemicals Ltd.",
+      "density": "2.13 g/cm³",
+      "viscosity": "90 mPa·s",
+      "packaging": "Sacks",
+      "pack_size": 25,
+      "unit": "kg",
+      "quantity": 80
+    },
+    {
+      "id": 6,
+      "chemical_name": "Hydrogen Peroxide",
+      "vender": "CleanChem Products",
+      "density": "1.45 g/cm³",
+      "viscosity": "1.25 mPa·s",
+      "packaging": "Plastic jugs",
+      "pack_size": 10,
+      "unit": "L",
+      "quantity": 60
+    },
+    {
+      "id": 7,
+      "chemical_name": "Benzene",
+      "vender": "OrganicChem Supply",
+      "density": "0.876 g/cm³",
+      "viscosity": "0.65 mPa·s",
+      "packaging": "Metal barrels",
+      "pack_size": 100,
+      "unit": "L",
+      "quantity": 70
+    },
+    {
+      "id": 8,
+      "chemical_name": "Toluene",
+      "vender": "SolventDirect",
+      "density": "0.87 g/cm³",
+      "viscosity": "0.58 mPa·s",
+      "packaging": "Plastic drums",
+      "pack_size": 50,
+      "unit": "L",
+      "quantity": 90
+    },
+    {
+      "id": 9,
+      "chemical_name": "Ammonia",
+      "vender": "ChemZone",
+      "density": "0.86 g/cm³",
+      "viscosity": "0.24 mPa·s",
+      "packaging": "Steel containers",
+      "pack_size": 40,
+      "unit": "kg",
+      "quantity": 40
+    },
+    {
+      "id": 10,
+      "chemical_name": "Sodium Chloride",
+      "vender": "SaltWorks Chemicals",
+      "density": "2.165 g/cm³",
+      "viscosity": "N/A",
+      "packaging": "Plastic sacks",
+      "pack_size": 25,
+      "unit": "kg",
+      "quantity": 75
+    },
+    {
+      "id": 11,
+      "chemical_name": "Nitric Acid",
+      "vender": "LabCentral Chemicals",
+      "density": "1.51 g/cm³",
+      "viscosity": "2.02 mPa·s",
+      "packaging": "Steel drums",
+      "pack_size": 50,
+      "unit": "L",
+      "quantity": 65
+    },
+    {
+      "id": 12,
+      "chemical_name": "Calcium Carbonate",
+      "vender": "MineralTech Supplies",
+      "density": "2.71 g/cm³",
+      "viscosity": "N/A",
+      "packaging": "Paper sacks",
+      "pack_size": 20,
+      "unit": "kg",
+      "quantity": 100
+    },
+    {
+      "id": 13,
+      "chemical_name": "Phosphoric Acid",
+      "vender": "AcidCo Industries",
+      "density": "1.88 g/cm³",
+      "viscosity": "3.6 mPa·s",
+      "packaging": "Plastic drums",
+      "pack_size": 60,
+      "unit": "L",
+      "quantity": 55
+    },
+    {
+      "id": 14,
+      "chemical_name": "Potassium Nitrate",
+      "vender": "AgriChem Suppliers",
+      "density": "2.11 g/cm³",
+      "viscosity": "N/A",
+      "packaging": "Plastic bags",
+      "pack_size": 50,
+      "unit": "kg",
+      "quantity": 90
+    },
+    {
+      "id": 15,
+      "chemical_name": "Acetic Acid",
+      "vender": "ChemSolutions Ltd.",
+      "density": "1.05 g/cm³",
+      "viscosity": "1.22 mPa·s",
+      "packaging": "Plastic jugs",
+      "pack_size": 30,
+      "unit": "L",
+      "quantity": 110
+    }
+  ]
+  
