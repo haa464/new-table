@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>json data into html formate</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+        }
+
+        .container {
+            position: relative;
+            padding: 20px 20px;
+            width: 100%;
+        }
+
+        .inner-table-cnt {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        .table-header h1 {
+            font-size: 36px;
+            font-weight: 700;
+            
+            color: #000;
+            align-self: center;
+        }
+
+        /* button design css */
+
+        button#add-row {
+            border-radius: 50px;
+            text-align: center;
+            overflow: hidden;
+            transition-duration: 0.3s;
+            background-color: #1155cc;
+            border: none;
+            color: #fff;
+            padding: 8px 10px;
+        }
+
+        button#add-row:hover {
+            background-color: #cdcdcd75;
+            border: none;
+            color: #1155cc;
+        }
+
+        .toolbar {
+            display: flex;
+            flex-direction: row;
+            column-gap: 15px;
+            align-items: center;
+        }
+
+
+        .colorbutton {
+            text-align: center;
+            overflow: hidden;
+            transition-duration: 0.3s;
+            background-color: #efefef14;
+            border: none;
+            color: #877676;
+        }
+
+        .colorbutton:hover,
+        .colordeleter:hover {
+            /* background-color: #1155cc; */
+            color: #1155cc;
+        }
+
+        .colorbutton i {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .colordeleter {
+            border-radius: 50px;
+            text-align: center;
+            overflow: hidden;
+            transition-duration: 0.3s;
+            background-color: #efefef14;
+            border: none;
+            color: red;
+        }
+
+        .colordeleter i {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 0;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        table tr th:nth-child(3),
+        table tr td:nth-child(3) {
+            border-right: 2px solid #ccc;
+        }
+
+        .form-desing {
+            max-width: 430px;
+            margin: 0 auto;
+            background: #0044bc;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 10px;
+        }
+
+        .form-desing button {
+            color: #000;
+            background: #ccc;
+            text-decoration: none;
+            
+            font-weight: 600;
+            letter-spacing: 0px;
+            line-height: 24px;
+            font-size: 16px;
+            text-transform: none;
+            text-align: center;
+            font-style: normal;
+            border: none;
+            padding: 8px 21px;
+            border-radius: 20px;
+        }
+
+        .form-desing input {
+            background-color: #f9fafb;
+            color: #000;
+            letter-spacing: 0;
+            width: 100%;
+            height: 32px;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #c0c4c9;
+            border-radius: 4px;
+        }
+
+        .form-desing select {
+            background-color: #cdcdcd;
+            color: #000;
+            letter-spacing: 0;
+            width: 100%;
+            height: 32px;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #c0c4c9;
+            border-radius: 4px;
+        }
+
+        .form-desing label {
+            font-weight: 500;
+            display: block;
+            color: #fff;
+            font-size: 16px;
+            
+            margin-bottom: 10px;
+            white-space: normal;
+        }
+
+        tr.hrederow-desing th {
+            color: #000000;
+            font-size: 14px;
+            font-weight: 400;
+            padding: 10px;
+            height: 100%;
+        }
+
+        span.denspan,
+        span.denspan {
+            font-size: 14px;
+            color: #c3c4be;
+            font-weight: 500;
+        }
+
+        .select-row:checked tr {
+            background-color: red;
+        }
+
+        .tablecont {
+            overflow-x: auto;
+        }
+
+        @media (max-width: 768px) {}
+
+        @media (max-width: 480px) {
+            .inner-table-cnt {
+                flex-direction: column;
+                align-items: flex-start;
+                row-gap: 20px;
+            }
+
+            .table-header h1 {
+                font-size: 24px;
+            }
+
+            button#add-row,
+            .colorbutton,
+            .colordeleter {
+                width: 100%;
+            }
+
+            table {
+                width: 100%;
+                min-width: 400px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="inner-table-cnt">
+            <div class="table-header">
+                <h1>Chemical Supplies</h1>
+            </div>
+
+            <div class="toolbar">
+                <button id="add-row"><i class="fas fa-plus"></i></button>
+                <button class="colorbutton" id="move-up"><i class="fas fa-arrow-up"></i></button>
+                <button class="colorbutton" id="move-down"><i class="fas fa-arrow-down"></i></button>
+                <button class="colordeleter" id="delete-row"><i class="fas fa-trash"></i></button>
+                <button class="colorbutton" id="refresh-data"><i class="fas fa-sync-alt"></i></button>
+                <button class="colorbutton" id="save-data"><i class="fas fa-save"></i></button>
+            </div>
+        </div>
+
+        <div class="table-from-cnt">
+            <div class="formdeta">
+                <form class="form-desing" action="" id="enterfromdetails" style="display: none;">
+                    <label for="chemical-name">Chemical Name</label>
+                    <input type="text" id="chemical-name" name="chemical_name" required>
+
+                    <label for="vendor">Vendor</label>
+                    <input type="text" id="vendor" name="vendor" required>
+
+                    <label for="density">Density (g/cm³)</label>
+                    <input type="number" id="density" name="density" step="0.01" required>
+
+                    <label for="viscosity">Viscosity (mPa·s)</label>
+                    <input type="number" id="viscosity" name="viscosity" step="0.01" required>
+
+                    <label for="packaging">Packaging</label>
+                    <input type="text" id="packaging" name="packaging" required>
+
+                    <label for="pack-size">Pack Size</label>
+                    <input type="text" id="pack-size" name="pack_size" required>
+
+                    <label for="unit">Unit</label>
+                    <select id="unit" name="unit" required>
+                        <option value="">Select a unit</option>
+                        <option value="L">Liters(L)</option>
+                        <option value="kg">Kilograms(kg)</option>
+                        <option value="g">Grams(g)</option>
+                        <option value="mL">Milliliters(ml)</option>
+                    </select>
+
+                    <label for="quantity">Quantity</label>
+                    <input type="number" id="quantity" name="quantity" min="1" required>
+
+                    <button type="submit" id="submit-data">Submit</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="tablecont">
+            <div class="detail-tabel">
+                <div id="table-cnt"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        let tableData = [];
+
+        function showdata() {
+            fetch('./indexdata.json')
+                .then(res => res.json())
+                .then(data => {
+                    // creat the table 
+                    const startable = document.createElement('table');
+                    const headerow = document.createElement('tr');
+                    headerow.classList.add('hrederow-desing');
+                    // create the select header
+                    const checheaderth = document.createElement('th');
+                    const checkheaderi = document.createElement('i');
+                    checkheaderi.classList.add('fas', 'fa-check', 'hdchhd');
+                    checheaderth.appendChild(checkheaderi);
+                    headerow.appendChild(checheaderth);
+
+                    const showkeys = ['', 'Chemical Name', 'Vendor', 'Density', 'Viscosity', 'Packaging', 'Pack Size', 'Unit', 'Quantity'];
+                    showkeys.forEach(showkey => {
+                        const th = document.createElement('th');
+                        const p = document.createElement('p');
+                        th.appendChild(p);
+                        const thvalue = p.innerHTML = showkey;
+                        if (thvalue == "Density") {
+                            const thspan = document.createElement('span');
+                            th.classList.add('denhead')
+                            thspan.classList.add('denspan');
+                            thspan.innerText = " g/cm³";
+                            th.appendChild(thspan);
+                        } else if (thvalue == "Viscosity") {
+                            const thspans = document.createElement('span');
+                            th.classList.add('vishead')
+                            thspans.classList.add('denspan');
+                            thspans.innerText = " m³/s";
+                            th.appendChild(thspans);
+                        }
+                        headerow.appendChild(th);
+                    });
+                    startable.appendChild(headerow);
+
+                    data.forEach(item => {
+                        const rowcheck = document.createElement('tr');
+                        const colcheck = document.createElement('td');
+                        const checkbox = document.createElement('input');
+                        checkbox.type = 'checkbox';
+                        checkbox.classList.add('select-row');
+                        colcheck.appendChild(checkbox);
+                        rowcheck.appendChild(colcheck);
+
+                        for (const key in item) {
+                            if (item.hasOwnProperty(key)) {
+                                const td = document.createElement('td');
+                                td.innerText = item[key];
+                                rowcheck.appendChild(td);
+                            }
+                        }
+
+                        startable.appendChild(rowcheck);
+                    });
+
+                    const maincontent = document.getElementById('table-cnt');
+                    maincontent.appendChild(startable);
+
+                    tableData = data;
+
+                });
+        }
+
+        
+
+        // button toogle add row
+        const addRow = document.getElementById('add-row').addEventListener('click', () => {
+            const formView = document.getElementById('enterfromdetails');
+            if (formView.style.display === 'none') {
+                formView.style.display = "block";
+            } else {
+                formView.style.display = "none";
+            }
+
+            const Submitdata = document.getElementById("submit-data").addEventListener("click", displayDetails);
+            var row = 15;
+            function displayDetails(e) {
+                e.preventDefault();
+                const chemicalInput = document.getElementById('chemical-name').value;
+                const vendorInput = document.getElementById('vendor').value;
+                const densityInput = document.getElementById('density').value;
+                const viscosityInput = document.getElementById('viscosity').value;
+                const packagingyInput = document.getElementById('packaging').value;
+                const packsizeInput = document.getElementById('pack-size').value;
+                const unitInput = document.getElementById('unit').value;
+                const quantityInput = document.getElementById('quantity').value;
+
+                const maincontentform = document.getElementById('table-cnt').querySelector('table');
+                const row1 = document.createElement('tr');
+
+                const fields = ['ID', 'Chemical Name', 'Vendor', 'Density', 'Viscosity', 'Packaging', 'Pack Size', 'Unit', 'Quantity'];
+                const newData = {
+                    ID: row + 1,
+                    'Chemical Name': chemicalInput,
+                    'Vendor': vendorInput,
+                    'Density': densityInput,
+                    'Viscosity': viscosityInput,
+                    'Packaging': packagingyInput,
+                    'Pack Size': packsizeInput,
+                    'Unit': unitInput,
+                    'Quantity': quantityInput
+                };
+
+                const checkboxCol = document.createElement('td');
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkboxCol.appendChild(checkbox);
+                row1.appendChild(checkboxCol);
+
+                fields.forEach(field => {
+                    const cell1 = document.createElement('td');
+                    cell1.innerText = newData[field];
+                    row1.appendChild(cell1);
+                })
+
+                maincontentform.appendChild(row1);
+                // row++;
+                tableData1 = data;
+
+                document.getElementById('enterfromdetails').reset();
+            }
+        });
+
+        const deleteTablerow = document.getElementById('delete-row').addEventListener('click', () => {
+            const Selectchecks = document.querySelectorAll('.select-row:checked');
+            if(Selectchecks.length > 0) {
+
+                Selectchecks.forEach(Selectcheck => {
+                    const removerow = Selectcheck.closest('tr');
+                    const removeindex = removerow.removeindex - 1;
+                    tableData.splice(removeindex, 1);
+                    removerow.remove();
+                })
+            } else {
+                alert("kindly select the checkbox")
+            }
+        });
+
+        document.getElementById('move-up').addEventListener('click', () => {
+            moveRow(-1);
+
+        })
+
+        document.getElementById('move-down').addEventListener('click', () => {
+            moveRow(1);
+        })
+
+        function moveRow(direction) {
+            const selectedCheckbox = document.querySelector('.select-row:checked');
+            if (selectedCheckbox) {
+                const row = selectedCheckbox.closest('tr');
+                const table = row.parentNode;
+                const rows = Array.from(table.rows);
+                const rowIndex = rows.indexOf(row);
+                // console.log(direction);
+
+                if (rowIndex + direction >= 0 && rowIndex + direction < rows.length) {
+                    const targetRow = rows[rowIndex + direction];
+                    // console.log(targetRow);
+                    if (direction === -1) {
+                        table.insertBefore(row, targetRow); 
+                    } else if (direction === 1) {
+                        table.insertBefore(targetRow, row);
+                    }
+                }
+            }
+        }
+
+        // work on the save
+        const savedaata = document.getElementById('save-data').addEventListener('click', () => {
+
+            var table = document.getElementById('table-cnt').querySelector('table');
+            const rows = table.getElementsByTagName('tr');
+            tableData = [];
+
+            for (let i = 1; i < rows.length; i++) {
+                const cells = rows[i].getElementsByTagName('td');
+                const rowData = {
+                    ID: cells[0].innerText,
+                    'Chemical Name': cells[1].innerText,
+                    'Vendor': cells[2].innerText,
+                    'Density': cells[3].innerText,
+                    'Viscosity': cells[4].innerText,
+                    'Packaging': cells[5].innerText,
+                    'Pack Size': cells[6].innerText,
+                    'Unit': cells[7].innerText,
+                    'Quantity': cells[8].innerText
+                };
+                tableData.push(rowData);
+            }
+
+            alert("Data saved successfully!");
+
+        });
+
+        // work on the refer
+        document.getElementById('refresh-data').addEventListener('click', savedaata);
+
+        window.onload = showdata();
+    </script>
+</body>
+
+</html>
