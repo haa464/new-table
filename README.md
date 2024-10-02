@@ -1,4 +1,4 @@
-# Chemical Supplies Management System
+# Table Design and function
 
 ## Project Overview
 
